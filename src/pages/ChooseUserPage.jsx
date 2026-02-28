@@ -6,7 +6,7 @@ export function ChooseUserPage({ onSelect }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/public/users")
+    fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/public/users")
       .then(res => res.json())
       .then(data => {
         setUsers(data);

@@ -22,7 +22,7 @@ export function AdminPage({ user }) {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/admin/users", {
+      const res = await fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/admin/users", {
         headers: {
           'user-id': user.id.toString(),
           'user-role': user.role
@@ -37,7 +37,7 @@ export function AdminPage({ user }) {
 
   const fetchBookings = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/admin/bookings", {
+      const res = await fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/admin/bookings", {
         headers: {
           'user-id': user.id.toString(),
           'user-role': user.role
@@ -57,7 +57,7 @@ export function AdminPage({ user }) {
     setSuccess("");
 
     try {
-      const res = await fetch("http://localhost:3000/api/admin/users", {
+      const res = await fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/admin/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +91,7 @@ export function AdminPage({ user }) {
     if (!confirm("Are you sure you want to delete this user? Their bookings will also be deleted.")) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/admin/users/${userId}`, {
+      const res = await fetch(`https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/admin/users/${userId}`, {
         method: "DELETE",
         headers: {
           'user-id': user.id.toString(),
@@ -113,7 +113,7 @@ export function AdminPage({ user }) {
 
   const changeUserRole = async (userId, newRole) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/admin/users/${userId}/role`, {
+      const res = await fetch(`https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/admin/users/${userId}/role`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -139,7 +139,7 @@ export function AdminPage({ user }) {
     if (!confirm("Are you sure you want to delete this booking?")) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/admin/deleteBookings/${bookingId}`, {
+      const res = await fetch(`https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/admin/deleteBookings/${bookingId}`, {
         method: "DELETE",
         headers: {
           'user-id': user.id.toString(),

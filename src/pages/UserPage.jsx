@@ -14,7 +14,7 @@ export function UserPage({ user }) {
 
   const fetchBookings = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/user/bookings", {
+      const res = await fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/user/bookings", {
         headers: {
           'user-id': user.id.toString(),
           'user-role': user.role
@@ -36,7 +36,7 @@ export function UserPage({ user }) {
     setSuccess("");
 
     try {
-      const res = await fetch("http://localhost:3000/api/user/bookings", {
+      const res = await fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/user/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export function UserPage({ user }) {
     if (!confirm("Are you sure you want to delete this booking?")) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/user/bookings/${bookingId}`, {
+      const res = await fetch(`https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/user/bookings/${bookingId}`, {
         method: "DELETE",
         headers: {
           'user-id': user.id.toString(),

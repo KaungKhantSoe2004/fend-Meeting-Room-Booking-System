@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000/api", 
+  baseURL: "https://booking.z256600-ll9lz.ps02.zwhhosting.com/api", 
   withCredentials: true,
 });
 

@@ -26,7 +26,7 @@ export function OwnerPage({ user }) {
 
   const fetchBookings = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/owner/bookings", {
+      const res = await fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/owner/bookings", {
         headers: {
           'user-id': user.id.toString(),
           'user-role': user.role
@@ -41,7 +41,7 @@ export function OwnerPage({ user }) {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/owner/users", {
+      const res = await fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/owner/users", {
         headers: {
           'user-id': user.id.toString(),
           'user-role': user.role
@@ -57,7 +57,7 @@ export function OwnerPage({ user }) {
 
   const fetchUsageSummary = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/owner/usage-summary", {
+      const res = await fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/owner/usage-summary", {
         headers: {
           'user-id': user.id.toString(),
           'user-role': user.role
@@ -74,7 +74,7 @@ export function OwnerPage({ user }) {
     if (!userId) return;
     
     try {
-      const res = await fetch(`http://localhost:3000/api/owner/bookingsByUser/${userId}`, {
+      const res = await fetch(`https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/owner/bookingsByUser/${userId}`, {
         headers: {
           'user-id': user.id.toString(),
           'user-role': user.role
@@ -94,7 +94,7 @@ export function OwnerPage({ user }) {
     setSuccess("");
 
     try {
-      const res = await fetch("http://localhost:3000/api/owner/createBookings", {
+      const res = await fetch("https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/owner/createBookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -129,7 +129,7 @@ export function OwnerPage({ user }) {
     if (!confirm("Are you sure you want to delete this booking?")) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/owner/deleteBookings/${bookingId}`, {
+      const res = await fetch(`https://booking.z256600-ll9lz.ps02.zwhhosting.com/api/owner/deleteBookings/${bookingId}`, {
         method: "DELETE",
         headers: {
           'user-id': user.id.toString(),
