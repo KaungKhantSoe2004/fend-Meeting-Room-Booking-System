@@ -22,8 +22,6 @@ export function UserPage({ user }) {
       });
       const data = await res.json();
       console.log(data, 'is data');
-      
-      // Ensure data is an array
       setBookings(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Fetch error:', error);
@@ -93,81 +91,79 @@ export function UserPage({ user }) {
     }
   };
 
-  // Helper function to check if booking belongs to current user
   const isOwnBooking = (booking) => {
-    // Check different possible property names for user ID
     return booking.user_id === user.id || 
            booking.userId === user.id || 
            booking.userid === user.id;
   };
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-2xl text-gray-800 mb-1">My Bookings</h2>
-        <p className="text-gray-500">Create and manage your meeting room bookings</p>
+    <div className="max-w-6xl mx-auto px-4 sm:px-5">
+      <div className="mb-6 sm:mb-8">
+        <h2 className="text-xl sm:text-2xl text-gray-800 mb-1">My Bookings</h2>
+        <p className="text-sm sm:text-base text-gray-500">Create and manage your meeting room bookings</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-5">
-        <div className="bg-white p-5 rounded-lg shadow">
-          <h3 className="text-lg text-gray-800 mb-4">Create New Booking</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <div className="bg-white p-4 sm:p-5 rounded-lg shadow">
+          <h3 className="text-base sm:text-lg text-gray-800 mb-4">Create New Booking</h3>
           <form onSubmit={createBooking} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <label className="font-medium text-gray-800">Start Time:</label>
+              <label className="font-medium text-gray-800 text-sm sm:text-base">Start Time:</label>
               <input
                 type="datetime-local"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
                 required
-                className="p-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500"
+                className="p-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 w-full"
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="font-medium text-gray-800">End Time:</label>
+              <label className="font-medium text-gray-800 text-sm sm:text-base">End Time:</label>
               <input
                 type="datetime-local"
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
                 required
-                className="p-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500"
+                className="p-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 w-full"
               />
             </div>
             <button 
               type="submit" 
               disabled={loading}
-              className="p-2 bg-blue-500 text-white border-none rounded cursor-pointer hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-2 bg-blue-500 text-white border-none rounded cursor-pointer hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
               {loading ? "Creating..." : "Create Booking"}
             </button>
           </form>
-          {error && <div className="text-red-500 mt-2 p-2 bg-red-50 rounded">{error}</div>}
-          {success && <div className="text-green-600 mt-2 p-2 bg-green-50 rounded">{success}</div>}
+          {error && <div className="text-red-500 mt-2 p-2 bg-red-50 rounded text-sm sm:text-base">{error}</div>}
+          {success && <div className="text-green-600 mt-2 p-2 bg-green-50 rounded text-sm sm:text-base">{success}</div>}
         </div>
 
-        <div className="bg-white p-5 rounded-lg shadow">
-          <h3 className="text-lg text-gray-800 mb-4">All Bookings</h3>
+        <div className="bg-white p-4 sm:p-5 rounded-lg shadow">
+          <h3 className="text-base sm:text-lg text-gray-800 mb-4">All Bookings</h3>
           {bookings.length === 0 ? (
-            <p className="text-gray-400 text-center py-5">No bookings found</p>
+            <p className="text-gray-400 text-center py-5 text-sm sm:text-base">No bookings found</p>
           ) : (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 max-h-96 overflow-y-auto pr-1">
               {bookings.map(booking => {
                 const isOwnedByUser = isOwnBooking(booking);
                 
                 return (
                   <div 
                     key={booking.id || booking.booking_id} 
-                    className={`p-4 border rounded flex justify-between items-center bg-white ${
+                    className={`p-3 sm:p-4 border rounded flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white ${
                       isOwnedByUser ? 'border-blue-200' : 'border-gray-200'
                     }`}
                   >
-                    <div className="flex-1">
-                      <div>
+                    <div className="flex-1 w-full sm:w-auto">
+                      <div className="text-xs sm:text-sm">
                         <strong>Start:</strong> {new Date(booking.start_time || booking.startTime).toLocaleString()}
                       </div>
-                      <div>
+                      <div className="text-xs sm:text-sm">
                         <strong>End:</strong> {new Date(booking.end_time || booking.endTime).toLocaleString()}
                       </div>
-                      <div>
+                      <div className="text-xs sm:text-sm">
                         <strong>Created:</strong> {new Date(booking.created_at || booking.createdAt).toLocaleString()}
                       </div>
                       {isOwnedByUser && (
@@ -178,7 +174,7 @@ export function UserPage({ user }) {
                     {isOwnedByUser && (
                       <button
                         onClick={() => deleteBooking(booking.id || booking.booking_id)}
-                        className="px-3 py-1.5 bg-red-500 text-white border-none rounded cursor-pointer text-sm hover:bg-red-600 transition-colors"
+                        className="px-3 py-1.5 bg-red-500 text-white border-none rounded cursor-pointer text-xs sm:text-sm hover:bg-red-600 transition-colors w-full sm:w-auto"
                       >
                         Delete
                       </button>

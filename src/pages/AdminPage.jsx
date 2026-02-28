@@ -168,33 +168,45 @@ export function AdminPage({ user }) {
   };
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-2xl text-gray-800 mb-1">Admin Dashboard</h2>
-        <p className="text-gray-500">Manage users and monitor all bookings</p>
+    <div className="max-w-6xl mx-auto px-4 sm:px-5">
+      <div className="mb-6 sm:mb-8">
+        <h2 className="text-xl sm:text-2xl text-gray-800 mb-1">Admin Dashboard</h2>
+        <p className="text-sm sm:text-base text-gray-500">Manage users and monitor all bookings</p>
       </div>
 
-      <div className="grid grid-cols-3 gap-5">
-        <div className="bg-white p-5 rounded-lg shadow">
-          <h3 className="text-lg text-gray-800 mb-4">Create New User</h3>
+      {error && (
+        <div className="mb-5 text-red-500 p-3 bg-red-50 rounded border border-red-200 text-sm sm:text-base">
+          {error}
+        </div>
+      )}
+      
+      {success && (
+        <div className="mb-5 text-green-600 p-3 bg-green-50 rounded border border-green-200 text-sm sm:text-base">
+          {success}
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+        <div className="bg-white p-4 sm:p-5 rounded-lg shadow">
+          <h3 className="text-base sm:text-lg text-gray-800 mb-4">Create New User</h3>
           <form onSubmit={createUser} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-              <label className="font-medium text-gray-800">Name:</label>
+              <label className="font-medium text-gray-800 text-sm sm:text-base">Name:</label>
               <input
                 type="text"
                 value={newUserName}
                 onChange={(e) => setNewUserName(e.target.value)}
                 required
-                className="p-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-gray-800"
+                className="p-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-gray-800 w-full"
                 placeholder="Enter user name"
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="font-medium text-gray-800">Role:</label>
+              <label className="font-medium text-gray-800 text-sm sm:text-base">Role:</label>
               <select
                 value={newUserRole}
                 onChange={(e) => setNewUserRole(e.target.value)}
-                className="p-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-gray-800"
+                className="p-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-gray-800 w-full"
               >
                 <option value="user">User</option>
                 <option value="owner">Owner</option>
@@ -204,34 +216,34 @@ export function AdminPage({ user }) {
             <button 
               type="submit" 
               disabled={loading}
-              className="p-2 bg-gray-800 text-white border-none rounded cursor-pointer hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-2 bg-gray-800 text-white border-none rounded cursor-pointer hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
               {loading ? "Creating..." : "Create User"}
             </button>
           </form>
         </div>
 
-        <div className="col-span-2 bg-white p-5 rounded-lg shadow">
-          <h3 className="text-lg text-gray-800 mb-4">Manage Users</h3>
+        <div className="col-span-1 md:col-span-2 bg-white p-4 sm:p-5 rounded-lg shadow">
+          <h3 className="text-base sm:text-lg text-gray-800 mb-4">Manage Users</h3>
           {users.length === 0 ? (
-            <p className="text-gray-400 text-center py-5">No users found</p>
+            <p className="text-gray-400 text-center py-5 text-sm sm:text-base">No users found</p>
           ) : (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 max-h-96 overflow-y-auto pr-1">
               {users.map(u => (
-                <div key={u.id} className="p-4 border border-gray-200 rounded flex justify-between items-center bg-white">
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium">{u.name}</span>
-                    <span className={`px-2 py-1 rounded text-white text-xs capitalize ${getRoleColor(u.role)}`}>
+                <div key={u.id} className="p-3 sm:p-4 border border-gray-200 rounded flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
+                    <span className="font-medium text-sm sm:text-base">{u.name}</span>
+                    <span className={`px-2 py-1 rounded text-white text-xs capitalize w-fit ${getRoleColor(u.role)}`}>
                       {u.role}
                     </span>
                   </div>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex gap-2 items-center w-full sm:w-auto">
                     {u.id !== user.id && (
                       <>
                         <select
                           onChange={(e) => changeUserRole(u.id, e.target.value)}
                           value={u.role}
-                          className="p-1 border border-gray-300 rounded text-xs focus:outline-none"
+                          className="p-1 border border-gray-300 rounded text-xs focus:outline-none flex-1 sm:flex-none"
                         >
                           <option value="user">User</option>
                           <option value="owner">Owner</option>
@@ -239,7 +251,7 @@ export function AdminPage({ user }) {
                         </select>
                         <button
                           onClick={() => deleteUser(u.id)}
-                          className="px-2 py-1 bg-red-500 text-white border-none rounded cursor-pointer text-xs hover:bg-red-600"
+                          className="px-3 py-1.5 bg-red-500 text-white border-none rounded cursor-pointer text-xs hover:bg-red-600 transition-colors"
                         >
                           Delete
                         </button>
@@ -252,23 +264,23 @@ export function AdminPage({ user }) {
           )}
         </div>
 
-        <div className="col-span-3 bg-white p-5 rounded-lg shadow">
-          <h3 className="text-lg text-gray-800 mb-4">All Bookings</h3>
+        <div className="col-span-1 md:col-span-3 bg-white p-4 sm:p-5 rounded-lg shadow">
+          <h3 className="text-base sm:text-lg text-gray-800 mb-4">All Bookings</h3>
           {bookings.length === 0 ? (
-            <p className="text-gray-400 text-center py-5">No bookings found</p>
+            <p className="text-gray-400 text-center py-5 text-sm sm:text-base">No bookings found</p>
           ) : (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 max-h-96 overflow-y-auto pr-1">
               {bookings.map(booking => (
-                <div key={booking.id} className="p-4 border border-gray-200 rounded flex justify-between items-center bg-white">
-                  <div className="grid grid-cols-4 gap-2 flex-1">
-                    <div><strong>User:</strong> {booking.user_name || `User ${booking.userId}`}</div>
-                    <div><strong>Start:</strong> {new Date(booking.start_time).toLocaleString()}</div>
-                    <div><strong>End:</strong> {new Date(booking.end_time).toLocaleString()}</div>
-                    <div><strong>Created:</strong> {new Date(booking.created_at).toLocaleString()}</div>
+                <div key={booking.id} className="p-3 sm:p-4 border border-gray-200 rounded flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 flex-1 w-full">
+                    <div className="text-xs sm:text-sm"><strong>User:</strong> {booking.user_name || `User ${booking.userId}`}</div>
+                    <div className="text-xs sm:text-sm"><strong>Start:</strong> {new Date(booking.start_time).toLocaleString()}</div>
+                    <div className="text-xs sm:text-sm"><strong>End:</strong> {new Date(booking.end_time).toLocaleString()}</div>
+                    <div className="text-xs sm:text-sm"><strong>Created:</strong> {new Date(booking.created_at).toLocaleString()}</div>
                   </div>
                   <button
                     onClick={() => deleteBooking(booking.id)}
-                    className="px-2 py-1 bg-red-500 text-white border-none rounded cursor-pointer text-xs hover:bg-red-600 ml-2"
+                    className="px-3 py-1.5 bg-red-500 text-white border-none rounded cursor-pointer text-xs sm:text-sm hover:bg-red-600 transition-colors w-full sm:w-auto"
                   >
                     Delete
                   </button>
@@ -278,9 +290,6 @@ export function AdminPage({ user }) {
           )}
         </div>
       </div>
-
-      {error && <div className="text-red-500 mt-5 p-2 bg-red-50 rounded">{error}</div>}
-      {success && <div className="text-green-600 mt-5 p-2 bg-green-50 rounded">{success}</div>}
     </div>
   );
 }
