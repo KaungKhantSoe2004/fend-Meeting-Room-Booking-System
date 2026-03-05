@@ -1,16 +1,49 @@
-# React + Vite
+React-based frontend application for the Meeting Room Booking System. It provides a user-friendly interface to manage room bookings based on different user roles.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Demo
 
-Currently, two official plugins are available:
+URL: https://fend-meeting-room-booking-system.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Key Features
 
-## React Compiler
+User Selection System: Choose between Admin, Owner, and User roles to access different functionalities.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+Role-Based Interface: Navigation and UI elements adapt based on the logged-in user's permissions.
 
-## Expanding the ESLint configuration
+Data Persistence: Uses localStorage to maintain user sessions and role data across page refreshes.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Responsive Design: Built with React for a dynamic and interactive experience.
+
+Tech Stack
+
+Library: React.js
+
+State Management: LocalStorage and React State
+
+Routing: React Router
+
+Styling: CSS
+
+Project Structure
+
+src/components: Reusable UI components.
+
+src/pages: Main application views (User Selection, Dashboard, etc.).
+
+localStorage: Used to store user role and ID for session management.
+
+Installation and Setup
+
+Clone the repository:
+git clone https://github.com/KaungKhantSoe2004/fend-Meeting-Room-Booking-System.git
+
+Navigate to the project folder:
+cd fend-Meeting-Room-Booking-System
+
+Install dependencies:
+npm install
+
+Check Backend Repository in here https://github.com/KaungKhantSoe2004/Meeting-Room-Booking-System
+
+Start the development server:
+npm start
